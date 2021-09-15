@@ -5,6 +5,10 @@
       <ul class="task-list-area">
         <li v-for="task in allTasks" :key="task.id" class="task">
           {{ task.title }}
+          <span class="icons">
+           <font-awesome-icon icon="trash-alt" class="trash-icon"/>
+           <font-awesome-icon icon="edit" class="edit-icon"/>
+           </span>
         </li>
       </ul>
     </div>
@@ -51,5 +55,16 @@ export default {
   border-radius: 5px;
   cursor: pointer;
   list-style: none;
+}
+.icons {
+    color: #fff;
+    position: absolute;
+    right: 70px;
+}
+.task:hover > .icons {
+    color: #1289d8;
+}
+.trash-icon {
+    margin-right: 5px;
 }
 </style>

@@ -5,6 +5,7 @@
       <form @submit.prevent="onSubmit">
         <input type="text" v-model="title" placeholder="Add a new task..." />
         <input type="submit" value="Add Task" />
+        <font-awesome-icon icon="plus" class="plus-icon" />
       </form>
     </div>
   </div>
@@ -16,15 +17,15 @@ import { mapActions } from "vuex";
 export default {
   name: "AddTask",
   data() {
-      return {
-          title: ''
-      }
+    return {
+      title: ""
+    };
   },
   methods: {
-      ...mapActions(['addTask']),
-      onSubmit(e) {
-          this.addTask(this.title);
-      }
+    ...mapActions(["addTask"]),
+    onSubmit(e) {
+      this.addTask(this.title);
+    }
   }
 };
 </script>
@@ -47,7 +48,23 @@ input[type="submit"] {
   cursor: pointer;
 }
 input[type="submit"]:hover {
-background: #fff;
+  background: #fff;
+  color: #1289d8;
+  border: 1px #64adf1 solid;
+  font-weight: 700;
+}
+.plus-icon {
+  position: relative;
+  top: 10px;
+  right: 50px;
+  color: white;
+  cursor: pointer;
+}
+input[type="submit"]:hover .plus-icon {
+  color: #1289d8;
+}
+.plus-icon:hover > input[type="submit"] {
+  background: #fff;
   color: #1289d8;
   border: 1px #64adf1 solid;
   font-weight: 700;
