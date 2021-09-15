@@ -2,7 +2,7 @@
   <div>
     <h3>Task Manager</h3>
     <div class="tasks">
-      <ul>
+      <ul class="task-list-area">
         <li v-for="task in allTasks" :key="task.id" class="task">
           {{ task.title }}
         </li>
@@ -30,17 +30,16 @@ export default {
 
 <style>
 .tasks {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
+  display: block;
+}
+.task-list-area { 
+    padding: 0;
 }
 .task {
   border: 1px solid #ccc;
-  background: #41b883;
+  background: #64adf1;
   padding: 1rem;
   border-radius: 5px;
-  text-align: center;
-  position: relative;
   cursor: pointer;
   list-style: none;
 }
