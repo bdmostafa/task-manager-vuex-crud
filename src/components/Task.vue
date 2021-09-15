@@ -1,21 +1,31 @@
 <template>
-    <div>
-        <h3>Task Manager</h3>
-        <div class="tasks">
-            <ul>
-                <li v-for="task in allTasks" :key="task.id" class="task">{{ task.title }}</li>
-            </ul>
-        </div>
+  <div>
+    <h3>Task Manager</h3>
+    <div class="tasks">
+      <ul>
+        <li v-for="task in allTasks" :key="task.id" class="task">
+          {{ task.title }}
+        </li>
+      </ul>
     </div>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-    name: 'Tasks',
-    computed: {...mapGetters(['allTasks'])}
-}
+  name: "Tasks",
+  methods: {
+    ...mapActions(["fetchTasks"])
+  },
+  computed: {
+    ...mapGetters(["allTasks"])
+  },
+  created() {
+    this.fetchTasks();
+  }
+};
 </script>
 
 <style>
