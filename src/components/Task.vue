@@ -3,35 +3,40 @@
     <h3>Task List</h3>
     <div class="list-sign">
       <span>Click on Check Mark to be as completed and vice-versa</span>
-      <span>
-        <span class="incomplete-list"></span> = Incomplete
-      </span>
-      <span>
-        <span class="complete-list"></span> = Complete
-      </span>
+      <span> <span class="incomplete-list"></span> = Incomplete </span>
+      <span> <span class="complete-list"></span> = Complete </span>
     </div>
     <div class="tasks">
+        <!-- <input v-model="title" v-if="isEdit" /> -->
       <ul class="task-list-area">
-        <li 
-         v-for="task in allTasks" 
-         :key="task.id" 
-         class="task"
-         :class="{'is-complete': task.completed}"
-         >
+        <li
+          v-for="task in allTasks"
+          :key="task.id"
+          class="task"
+          :class="{ 'is-complete': task.completed }"
+        >
           {{ task.title }}
           <span class="icons">
-           <font-awesome-icon 
-            @click="deleteTask(task.id)" 
-            icon="trash-alt" 
-            class="trash-icon"/>
-           <font-awesome-icon 
-            icon="edit" 
-            class="edit-icon"/>
-           <font-awesome-icon 
-            @click="taskCompleted(task)"
-            icon="check-square" 
-            class="check-icon"/>
-           </span>
+            <font-awesome-icon
+              @click="deleteTask(task.id)"
+              icon="trash-alt"
+              class="trash-icon"
+            />
+            <!-- <font-awesome-icon
+              @click="taskUpdated(task)"
+              icon="edit"
+              class="edit-icon"
+            /> -->
+            <font-awesome-icon
+              icon="edit"
+              class="edit-icon"
+            />
+            <font-awesome-icon
+              @click="taskCompleted(task)"
+              icon="check-square"
+              class="check-icon"
+            />
+          </span>
         </li>
       </ul>
     </div>
@@ -43,15 +48,29 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Tasks",
+//   data() {
+//     return { 
+//         title ='',
+//         isEdit: false
+//          };
+//   },
   methods: {
-    ...mapActions(["fetchTasks", "deleteTask", "completeTask"]),
+    ...mapActions(["fetchTasks", "deleteTask", "updateTask", "completeTask"]),
+    taskUpdated(task) {
+      const updatedTask = {
+        title: task.title,
+        id: task.id,
+        completed: task.completed
+      };
+      this.updateTask(updatedTask);
+    },
     taskCompleted(task) {
-        const updatedTask = {
-            title: task.title,
-            id: task.id,
-            completed: !task.completed
-        }
-        this.completeTask(updatedTask)
+      const updatedTask = {
+        title: task.title,
+        id: task.id,
+        completed: !task.completed
+      };
+      this.completeTask(updatedTask);
     }
   },
   computed: {
@@ -67,8 +86,8 @@ export default {
 .tasks {
   display: block;
 }
-.task-list-area { 
-    padding: 0;
+.task-list-area {
+  padding: 0;
 }
 .task {
   border: 1px solid #ccc;
@@ -88,15 +107,15 @@ export default {
   list-style: none;
 }
 .icons {
-    color: #fff;
-    position: absolute;
-    right: 70px;
+  color: #fff;
+  position: absolute;
+  right: 70px;
 }
 .task:hover > .icons {
-    color: #1289d8;
+  color: #1289d8;
 }
 .trash-icon {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 .list-sign {
   display: flex;
@@ -119,8 +138,7 @@ export default {
   background: #35495e;
   color: #fff;
 }
-.is-complete > .icons{
+.is-complete > .icons {
   color: #fff;
 }
-
 </style>

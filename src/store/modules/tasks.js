@@ -28,11 +28,10 @@ const actions = {
 
     // Validation on empty data
     if (title.length > 0) {
-        commit("ADD_TASK", response.data);
+      commit("ADD_TASK", response.data);
     } else {
-        alert('There is an empty. Please try again with text')
+      alert("There is an empty. Please try again with text");
     }
-    
   },
   async deleteTask({ commit }, id) {
     await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
@@ -50,8 +49,19 @@ const actions = {
 
     commit("LIMIT_TASKS", response.data);
   },
+  async updateTask({ commit }, task) {
+    const response = await axios.put(
+      `https://jsonplaceholder.typicode.com/todos/${task.id}`,
+      task
+    );
+
+    commit("UPDATE_TASK", response.data);
+  },
   async completeTask({ commit }, task) {
-    const response = await axios.put(`https://jsonplaceholder.typicode.com/todos/${task.id}`, task)
+    const response = await axios.put(
+      `https://jsonplaceholder.typicode.com/todos/${task.id}`,
+      task
+    );
 
     commit("COMPLETE_TASK", response.data);
   }
@@ -63,12 +73,19 @@ const mutations = {
   DELETE_TASK: (state, id) =>
     (state.tasks = state.tasks.filter(task => task.id != id)),
   LIMIT_TASKS: (state, payload) => (state.tasks = payload),
-  COMPLETE_TASK: (state, payload) => {
-      const taskIndex = state.tasks.findIndex(task => task.id === payload.id)
+  UPDATE_TASK: (state, payload) => {
+    const taskIndex = state.tasks.findIndex(task => task.id === payload.id);
 
-      if (taskIndex !== -1) {
-          state.tasks.splice(taskIndex, 1, payload);
-      }
+    if (taskIndex !== -1) {
+      state.tasks.splice(taskIndex, 1, payload);
+    }
+  },
+  COMPLETE_TASK: (state, payload) => {
+    const taskIndex = state.tasks.findIndex(task => task.id === payload.id);
+
+    if (taskIndex !== -1) {
+      state.tasks.splice(taskIndex, 1, payload);
+    }
   }
 };
 
