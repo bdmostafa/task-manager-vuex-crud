@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Task Manager</h3>
+    <h3>Task List</h3>
     <div class="tasks">
       <ul class="task-list-area">
         <li v-for="task in allTasks" :key="task.id" class="task">
@@ -38,6 +38,15 @@ export default {
 .task {
   border: 1px solid #ccc;
   background: #64adf1;
+  padding: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  list-style: none;
+}
+.task:hover {
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #1289d8;
   padding: 1rem;
   border-radius: 5px;
   cursor: pointer;

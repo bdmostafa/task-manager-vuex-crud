@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <div class="container">
+      <h1 class="headeing"> Task Manager </h1>
+      <AddTask />
       <Tasks />
     </div>
   </div>
@@ -8,12 +10,14 @@
 
 <script>
 import Tasks from './components/Task.vue'
+import AddTask from './components/AddTask.vue'
 
 export default {
   name: 'app',
 
   components: {
-    Tasks
+    Tasks,
+    AddTask,
   },
 
   data () {
@@ -35,5 +39,8 @@ body {
   margin: auto;
   overflow: auto;
   padding: 0 2rem;
+}
+.headeing {
+  text-align: center;
 }
 </style>
