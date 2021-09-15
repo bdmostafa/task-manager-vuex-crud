@@ -6,8 +6,16 @@
         <li v-for="task in allTasks" :key="task.id" class="task">
           {{ task.title }}
           <span class="icons">
-           <font-awesome-icon @click="deleteTask(task.id)" icon="trash-alt" class="trash-icon"/>
-           <font-awesome-icon icon="edit" class="edit-icon"/>
+           <font-awesome-icon 
+            @click="deleteTask(task.id)" 
+            icon="trash-alt" 
+            class="trash-icon"/>
+           <font-awesome-icon 
+            icon="edit" 
+            class="edit-icon"/>
+           <font-awesome-icon 
+            icon="check-square" 
+            class="check-icon"/>
            </span>
         </li>
       </ul>

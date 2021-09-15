@@ -26,7 +26,13 @@ const actions = {
       postData
     );
 
-    commit("ADD_TASK", response.data);
+    // Validation on empty data
+    if (title.length > 0) {
+        commit("ADD_TASK", response.data);
+    } else {
+        alert('There is an empty. Please try again with text')
+    }
+    
   },
   async deleteTask({ commit }, id) {
     await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
