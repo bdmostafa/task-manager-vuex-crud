@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <div class="container">
-      <Todos />
+      <Tasks />
     </div>
   </div>
 </template>
 
 <script>
-import Todos from './components/Todo.vue'
+import Tasks from './components/Task.vue'
 
 export default {
   name: 'app',
 
   components: {
-    Todos
+    Tasks
   },
 
   data () {
