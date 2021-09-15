@@ -32,6 +32,17 @@ const actions = {
     await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
 
     commit("DELETE_TASK", id);
+  },
+  async limitTasks({ commit }, event) {
+    // Getting selected number
+    const number = parseInt(
+      event.target.options[event.target.options.selectedIndex].innerText
+    );
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/todos/?_limit=${number}`
+    );
+
+    commit("LIMIT_TASKS", response.data);
   }
 };
 
@@ -39,7 +50,8 @@ const mutations = {
   FETCH_TASKS: (state, payload) => (state.tasks = payload),
   ADD_TASK: (state, payload) => state.tasks.unshift(payload),
   DELETE_TASK: (state, id) =>
-    (state.tasks = state.tasks.filter(task => task.id != id))
+    (state.tasks = state.tasks.filter(task => task.id != id)),
+  LIMIT_TASKS: (state, payload) => (state.tasks = payload)
 };
 
 export default {

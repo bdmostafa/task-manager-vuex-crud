@@ -3,6 +3,7 @@
     <div class="container">
       <h1 class="headeing"> Task Manager </h1>
       <AddTask />
+      <LimitTasks />
       <Tasks />
     </div>
   </div>
@@ -11,6 +12,7 @@
 <script>
 import Tasks from './components/Task.vue'
 import AddTask from './components/AddTask.vue'
+import LimitTasks from './components/LimitTasks.vue'
 
 export default {
   name: 'app',
@@ -18,6 +20,7 @@ export default {
   components: {
     Tasks,
     AddTask,
+    LimitTasks
   },
 
   data () {
