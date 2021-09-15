@@ -6,7 +6,7 @@
         <li v-for="task in allTasks" :key="task.id" class="task">
           {{ task.title }}
           <span class="icons">
-           <font-awesome-icon icon="trash-alt" class="trash-icon"/>
+           <font-awesome-icon @click="deleteTask(task.id)" icon="trash-alt" class="trash-icon"/>
            <font-awesome-icon icon="edit" class="edit-icon"/>
            </span>
         </li>
@@ -21,7 +21,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Tasks",
   methods: {
-    ...mapActions(["fetchTasks"])
+    ...mapActions(["fetchTasks", "deleteTask"])
   },
   computed: {
     ...mapGetters(["allTasks"])
