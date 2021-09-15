@@ -1,9 +1,23 @@
 <template>
   <div>
     <h3>Task List</h3>
+    <div class="list-sign">
+      <span>Click on Check Mark to be as completed and vice-versa</span>
+      <span>
+        <span class="incomplete-list"></span> = Incomplete
+      </span>
+      <span>
+        <span class="complete-list"></span> = Complete
+      </span>
+    </div>
     <div class="tasks">
       <ul class="task-list-area">
-        <li v-for="task in allTasks" :key="task.id" class="task">
+        <li 
+         v-for="task in allTasks" 
+         :key="task.id" 
+         class="task"
+         :class="{'is-complete': task.completed}"
+         >
           {{ task.title }}
           <span class="icons">
            <font-awesome-icon 
@@ -14,6 +28,7 @@
             icon="edit" 
             class="edit-icon"/>
            <font-awesome-icon 
+            @click="taskCompleted(task)"
             icon="check-square" 
             class="check-icon"/>
            </span>
@@ -29,7 +44,15 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Tasks",
   methods: {
-    ...mapActions(["fetchTasks", "deleteTask"])
+    ...mapActions(["fetchTasks", "deleteTask", "completeTask"]),
+    taskCompleted(task) {
+        const updatedTask = {
+            title: task.title,
+            id: task.id,
+            completed: !task.completed
+        }
+        this.completeTask(updatedTask)
+    }
   },
   computed: {
     ...mapGetters(["allTasks"])
@@ -75,4 +98,29 @@ export default {
 .trash-icon {
     margin-right: 5px;
 }
+.list-sign {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+.complete-list {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #35495e;
+}
+.incomplete-list {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #64adf1;
+}
+.is-complete {
+  background: #35495e;
+  color: #fff;
+}
+.is-complete > .icons{
+  color: #fff;
+}
+
 </style>

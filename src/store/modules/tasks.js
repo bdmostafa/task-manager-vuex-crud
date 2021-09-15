@@ -49,6 +49,11 @@ const actions = {
     );
 
     commit("LIMIT_TASKS", response.data);
+  },
+  async completeTask({ commit }, task) {
+    const response = await axios.put(`https://jsonplaceholder.typicode.com/todos/${task.id}`, task)
+
+    commit("COMPLETE_TASK", response.data);
   }
 };
 
@@ -57,7 +62,14 @@ const mutations = {
   ADD_TASK: (state, payload) => state.tasks.unshift(payload),
   DELETE_TASK: (state, id) =>
     (state.tasks = state.tasks.filter(task => task.id != id)),
-  LIMIT_TASKS: (state, payload) => (state.tasks = payload)
+  LIMIT_TASKS: (state, payload) => (state.tasks = payload),
+  COMPLETE_TASK: (state, payload) => {
+      const taskIndex = state.tasks.findIndex(task => task.id === payload.id)
+
+      if (taskIndex !== -1) {
+          state.tasks.splice(taskIndex, 1, payload);
+      }
+  }
 };
 
 export default {
